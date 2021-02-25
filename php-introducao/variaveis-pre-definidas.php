@@ -3,7 +3,7 @@
     $idade = $_GET["idade"];
     $ano_nascimento = date("Y") - $idade;
 
-    if (isset($_GET["fez-aniversario"])) {
+    if (!isset($_GET["fez-aniversario"])) {
         $ano_nascimento = $ano_nascimento - 1;
     }
 
