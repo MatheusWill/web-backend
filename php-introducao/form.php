@@ -11,6 +11,9 @@
 
         <input type="number" name="idade" placeholder="Digite a sua idade.">
 
+        <input type="checkbox" id="fez-aniversario" name="fez-aniversario" value="sim" >
+        <label for="fez-aniversario">Já fez aniversario esse ano?</label>
+
         <button>Enviar</button>
     </form> 
 </body>
