@@ -1,4 +1,6 @@
 <?php
+
+    include("../../funcoes.php");
     
     if (!isset($_GET["real"]) && (!isset($_GET["dolar"]) || !isset($_GET["euro"]))){
 
@@ -7,10 +9,7 @@
     }
 
     $real = $_GET["real"];
-    $dolar = 5.41;
-    $euro = 6.57;
-    $realConvertidoDolar = $real * $dolar;
-    $realConvertidoEuro = $real * $euro;
+    $valorconvertido = conversaoMoeda($real);
 
 ?>
 <!DOCTYPE html>
@@ -23,14 +22,7 @@
 </head>
 <body>
     <?php
-        if (isset($_GET["dolar"]) && isset($_GET["euro"])) { 
-            echo "<h1>Valor total em Dolar: $$realConvertidoDolar</h1>";
-            echo "<h1>Valor total em Euro: €$realConvertidoEuro</h1>";
-        } else if (isset($_GET["euro"])){ 
-            echo "<h1>Valor total em Euro: €$realConvertidoEuro</h1>";
-        } else { 
-            echo "<h1>Valor total em Dolar: $$realConvertidoDolar</h1>";
-        }
+        echo "<h1>$valorconvertido</h1>";
     ?>
 </body>
 </html>

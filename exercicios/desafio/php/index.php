@@ -12,27 +12,27 @@
 
         <div class="input-group">
             <label for="numero1">Numero 1</label>
-            <input type="number" name="numero1">
+            <input type="number" name="numero1" step="0.01">
         </div>
 
         <div class="input-group">
             <label for="numero2">Numero 2</label>
-            <input type="number" name="numero2">
+            <input type="number" name="numero2" step="0.01">
         </div>
 
         <div class="input-group">
             <label for="numero3">Numero 3</label>
-            <input type="number" name="numero3">
+            <input type="number" name="numero3" step="0.01">
         </div>
 
         <div class="input-group">
             <label for="numero4">Numero 4</label>
-            <input type="number" name="numero4">
+            <input type="number" name="numero4" step="0.01">
         </div>
 
         <div class="input-group">
             <label for="numero5">Numero 5</label>
-            <input type="number" name="numero5">
+            <input type="number" name="numero5" step="0.01">
         </div>
 
         <button>Enviar</button>

@@ -1,5 +1,7 @@
 <?php
 
+    include("../../funcoes.php");
+
     if (!isset($_GET["nome"]) || !isset($_GET["salario"])){ 
 
         header("location: index.php");
@@ -9,11 +11,7 @@
     $nome = $_GET["nome"];
     $salario = $_GET["salario"];
 
-    if ($salario > 5000) {
-        $salario += ($salario * 0.1);
-    } else {
-        $salario += ($salario * 0.2);
-    }
+    $aumentoSalario = aumentoSalario($salario);
 
 ?>
 
@@ -29,7 +27,7 @@
 
 <body>
     <?php
-        echo "<h1>O $nome passará a receber <em>R$$salario</em></h1>";
+        echo "<h1>O $nome passará a receber <em>R$aumentoSalario</em></h1>";
     ?>
 </body>
 
