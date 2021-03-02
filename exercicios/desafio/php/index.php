@@ -11,28 +11,28 @@
         <h1>Soma dos numeros</h1>
 
         <div class="input-group">
-            <label for="numero[]">Numero 1</label>
-            <input type="number" name="numero[]">
+            <label for="numero1">Numero 1</label>
+            <input type="number" name="numero1">
         </div>
 
         <div class="input-group">
-            <label for="numero[]">Numero 2</label>
-            <input type="number" name="numero[]">
+            <label for="numero2">Numero 2</label>
+            <input type="number" name="numero2">
         </div>
 
         <div class="input-group">
-            <label for="numero[]">Numero 3</label>
-            <input type="number" name="numero[]">
+            <label for="numero3">Numero 3</label>
+            <input type="number" name="numero3">
         </div>
 
         <div class="input-group">
-            <label for="numero[]">Numero 4</label>
-            <input type="number" name="numero[]">
+            <label for="numero4">Numero 4</label>
+            <input type="number" name="numero4">
         </div>
 
         <div class="input-group">
-            <label for="numero[]">Numero 5</label>
-            <input type="number" name="numero[]">
+            <label for="numero5">Numero 5</label>
+            <input type="number" name="numero5">
         </div>
 
         <button>Enviar</button>
