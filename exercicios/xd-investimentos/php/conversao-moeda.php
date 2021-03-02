@@ -1,9 +1,9 @@
 <?php
     
-    if (!isset($_GET["real"])) {
+    if (!isset($_GET["real"]) && (!isset($_GET["dolar"]) || !isset($_GET["euro"]))){
+
         header("location: index.php");
-        $_POST['dolar'] = ( isset($_POST["dolar"]) ) ? true : null;
-        $_POST['euro']  = ( isset($_POST["euro"]) )  ? true : null;
+        
     }
 
     $real = $_GET["real"];
@@ -23,13 +23,13 @@
 </head>
 <body>
     <?php
-        if (isset($_GET["dolar"])) { 
+        if (isset($_GET["dolar"]) && isset($_GET["euro"])) { 
             echo "<h1>Valor total em Dolar: $$realConvertidoDolar</h1>";
+            echo "<h1>Valor total em Euro: €$realConvertidoEuro</h1>";
         } else if (isset($_GET["euro"])){ 
             echo "<h1>Valor total em Euro: €$realConvertidoEuro</h1>";
-        } else if (isset($_GET["euro"]) && isset($_GET["dolar"])){
+        } else { 
             echo "<h1>Valor total em Dolar: $$realConvertidoDolar</h1>";
-            echo "<h1>Valor total em Euro: €$realConvertidoEuro</h1>";
         }
     ?>
 </body>

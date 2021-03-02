@@ -19,12 +19,12 @@
         
         <div id="moedas">   
             <label for="dolar" class="container">Dolar
-                <input type="checkbox" name="dolar" id="dolar" value="dolar" required>
+                <input type="checkbox" name="dolar" id="dolar" value="dolar">
                 <span class="checkmark"></span>
             </label>
 
             <label for="euro" class="container">Euro
-                <input type="checkbox" name="euro" id="euro" value="euro" required>
+                <input type="checkbox" name="euro" id="euro" value="euro">
                 <span class="checkmark"></span>
             </label>
 
