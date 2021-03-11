@@ -1,9 +1,9 @@
 <?php
 
-    if (!isset($_POST["num01"]) || !isset($_POST["num02"]) && (!isset($_POST["operac"])) ) {
+    // if (!isset($_POST["num01"]) || !isset($_POST["num02"]) && (!isset($_POST["operac"])) ) {
        
-        header("location: index.php");
-    }
+    //     header("location: index.php");
+    // }
 
     $num01 = filter_input(INPUT_POST,'num01');
     $num02 = filter_input(INPUT_POST,'num02');
