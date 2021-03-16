@@ -1,11 +1,22 @@
 <?php
 
+// function soma (array $vetorInteiros){
+//     $soma = 0;
+//     for ($i=0; $i < count($vetorInteiros); $i++) { 
+//         $soma = $soma + $vetorInteiros[$i];
+//     }
+//     return $soma;
+// }
+// $soma = soma([2, 2, 30, 4]);
+// echo "<h2>Resultado soma dos elementos: $soma</h2>";
+
 //Função que retorna a soma dos elementos
-function somaElementos(int $a, int $b){
-    return $a + $b;
+function somarElementos (array $elementos){
+    return array_sum($elementos);
 }
-$somaElementos = somaElementos(5, 11);
-echo "<h2>Resultado soma dos elementos A e B: $somaElementos</h2>";
+$elementosSomados = somarElementos([1, 2, 5, 3, 5]);
+
+ echo "<h2>Resultado soma dos elementos: $elementosSomados</h2>";
 
 //Função que procura um nome e retorna true ou false
 function nomes(array $nome, $nomeEspecifico){
