@@ -47,22 +47,32 @@ function inverter (array $arrayInverso){
 
 inverter(["Olá", 1, 2, "Trinta"]);
 
+echo "<br><br>";
+
 //Função de deletar valor
 function deletarValor (array $deletarVetor, $valorDeletar){
 
-    foreach($deletarVetor as $i){
-
-        if($i == $valorDeletar){
-            unset($deletarVetor[$valorDeletar]);
-            print_r($i);
-            // echo "<b>$i</b>";
-        } else {
-            $y = "False";
-        }
-    }
-    
     print_r($deletarVetor);
-    echo $y;
+    echo "<br>";
+    print_r($valorDeletar);
+    echo "<br>";
+
+    foreach($deletarVetor as $key => $i){
+
+        if ($i == $valorDeletar) {
+
+           unset($deletarVetor[$key]);
+           
+           echo "<b>O valor deletado foi: $i </b>";
+           echo "<br>";
+
+           print_r($deletarVetor);
+           break;
+
+        } else {
+            echo false;     
+        } 
+    }
 }
 
-deletarValor([5, 10, 15, 20], 10);
+deletarValor([5, 10, 15, 20, 22], 135);

@@ -1,7 +1,18 @@
 <?php
 
-$nome =  $_POST['nome'];
-$cidade = $_POST['cidades'];
+$listaCidades = [
+    1 => "Jandira",
+    2 => "Itapevi",
+    3 => "Barueri",
+    4 => "Osasco",
+    5 => "Cotia",
+    6 => "Santana de Parnaíba",
+    7 => "Carapicuíba",
+    8 => "São Paulo",
+];
+
+$cidadeSelecionada = $_POST["cidades"];
+$nome = $_POST["nome"];
 
 ?>
 
@@ -15,7 +26,7 @@ $cidade = $_POST['cidades'];
 </head>
 <body>
     <Form>
-        <h1>Olá <?=$nome ?>, de <?=$cidade ?>, seja bem-vindo. </h1>
+        <h1>Olá <?=$nome ?>, de <?=$listaCidades[$cidadeSelecionada] ?>, seja bem-vindo. </h1>
     </Form>
 </body>
 </html>
