@@ -19,6 +19,8 @@ echo "<h2>Resultado soma dos elementos: $soma</h2>";
 
 //  echo "<h2>Resultado soma dos elementos: $elementosSomados</h2>";
 
+// ----------------------------------------------------------------------------
+
 //Função que procura um nome e retorna true ou false
 function nomes(array $nome, $nomeEspecifico){
     foreach($nome as $x){
@@ -35,20 +37,37 @@ function nomes(array $nome, $nomeEspecifico){
 
 nomes(["matheus", "carla", "joão", "maria"], "joão");
 
-//Função para inverter a ordem do vetor
-function inverter (array $arrayInverso){
+// ----------------------------------------------------------------------------
 
-    foreach(array_reverse($arrayInverso) as $i => $arrayInverso){
-        
-        echo "<b>$arrayInverso </b>";
-     
+//Função para inverter a ordem do vetor
+
+function inverter(array $vetor){
+    $vetorInvertido = [];
+
+    for ($i= (count($vetor) - 1); $i >= 0; $i--) { 
+        $vetorInvertido[] = $vetor[$i];
     }
 
+    return $vetorInvertido;
 }
 
-inverter(["Olá", 1, 2, "Trinta"]);
+$vetorInvertido = inverter(["Olá", 1, 2, "Trinta"]);
+
+print_r($vetorInvertido);
+
+// function inverter (array $arrayInverso){
+
+//     foreach(array_reverse($arrayInverso) as $i => $arrayInverso){
+        
+//         echo "<b>$arrayInverso </b>";
+     
+//     }
+
+// }
 
 echo "<br><br>";
+
+// ----------------------------------------------------------------------------
 
 //Função de deletar valor
 function deletarValor (array $deletarVetor, $valorDeletar){
