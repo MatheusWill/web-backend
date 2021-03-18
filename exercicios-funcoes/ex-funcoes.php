@@ -96,3 +96,107 @@ function deletarValor (array $deletarVetor, $valorDeletar){
 }
 
 deletarValor([5, 10, 15, 20, "batata"], "batata");
+echo "<br><br>";
+
+// ----------------------------------------------------------------------------
+
+//Retornar apenas as chaves do vetor
+function retorna (array $vetor){
+
+    foreach($vetor as $key => $i){
+        $chavesVertor = $key;
+    }
+    return $chavesVertor;
+}
+
+print_r (retorna([1, 2, 5, 6, 5, 6]));
+echo "<br><br>";
+
+// ----------------------------------------------------------------------------
+
+//Função que retorna o maior e menor numero dentro do vetor
+function maiorMenor (array $vetor){
+    $maior = 0;
+    $menor = $vetor;
+    
+    foreach($vetor as $key => $i){      
+        
+        if($i > $maior){
+            $maior = $i;
+        } 
+        if ($i < $menor) {
+            $menor = $i;
+        }    
+    }
+    return $resultado = [$maior, $menor]; 
+}
+
+print_r (maiorMenor([11, 7, 59, 105, 5, 9]));
+
+echo "<br><br>";
+
+// ----------------------------------------------------------------------------
+
+//Função que retorna a media de notas
+
+function media (array $notas){
+
+    $mediaNotas = 0;
+
+    foreach($notas as $i){
+        $mediaNotas = $mediaNotas + $i;
+    }
+
+    return $mediaNotas/count($notas);
+}
+
+
+print_r(media([9, 9, 7, 6]));
+
+echo "<br><br>";
+
+// ----------------------------------------------------------------------------
+
+//Função para saber se um numeor é primo
+
+function numeroPrimo($numero){
+    $divisor = 0;
+
+    for ($i=2; $i < $numero; $i++) { 
+        if ($numero % $i == 0) {
+            $divisor++;
+        }
+    }
+    echo $divisor ?  "Não é primo" : "É numero primo";
+
+    // if ($divisor) {
+    //     echo "<b>Não é numero primo</b>";
+    // } else {
+    //     echo "<b>É numero primo</b>";
+    // }
+}
+
+numeroPrimo(17);
+
+echo "<br><br>";
+
+// ----------------------------------------------------------------------------
+
+function procurarValor (array $primeiroVetor, array $segundoVetor){
+
+    foreach($segundoVetor as $i){
+
+        foreach($primeiroVetor as $j){
+
+            if($i == $j){
+                $y = "true";
+                break;
+            } else if ($j != $i){
+                $y = "false";
+            }
+        }
+    }
+    echo "<h2>$y</h2>";
+}
+
+procurarValor ([1, 2, 10, 56, 55, 57], [2, 55, 57, 1]);
