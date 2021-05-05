@@ -1,3 +1,9 @@
+<?php
+
+session_start();
+
+?>
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -17,7 +23,20 @@
     <section class="produtos-container">
       <main>
         <form class="form-produto" method="POST" action="../novoActions.php">
+
           <h1>Cadastro de produto</h1>
+          <ul>
+            <?php
+            if (isset($_SESSION["erros"])) {
+              foreach ($_SESSION["erros"] as $erros) {
+            ?>
+                <li><?= $erros ?></li>
+            <?php
+              }
+              unset($_SESSION["erros"]);
+            }
+            ?>
+          </ul>
 
           <input type="hidden" name="acao" value="salvar" />
           <div class="input-group span2">
@@ -60,7 +79,7 @@
             <label for="desconto">Desconto</label>
             <input type="text" id="desconto" name="desconto">
           </div>
-          
+
           <button onclick="javascript:window.location.href = '../'">Cancelar</button>
           <button name="salvar">Salvar</button>
         </form>

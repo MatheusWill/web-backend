@@ -1,6 +1,8 @@
 <?php
 
+session_start();
 include("../database/conexao.php");
+include("./funcionNovo.php");
 
 switch ($_POST["acao"]) {
     case "salvar":
@@ -9,13 +11,23 @@ switch ($_POST["acao"]) {
             die("ERRO AO CONECTAR" . mysqli_connect_error());
         }
 
+        //faltou chamar a função aqui
+        $erros = validarCampos();
+
+        //aqui tem que verificar se tem erros e colocar na sessão
+        if(count($erros) > 0){
+            $_SESSION["erros"] = $erros;
+
+            header("location: novo/index.php");
+        }
+
         $descricao = $_POST["descricao"];
-        $peso = $_POST["peso"];
+        $peso = str_replace(",", ".", $_POST["peso"]);
         $quantidade = $_POST["quantidade"];
         $cor = $_POST["cor"];
         $tamanho = $_POST["tamanho"];
-        $valor = $_POST["valor"];
-        $desconto = $_POST["desconto"];
+        $valor = str_replace(",", ".", $_POST["valor"]);
+        $desconto = $_POST["desconto"] != "" ? $_POST["desconto"] : 0;
         $imagem = "1";
 
         $sqlInsert = "insert into tbl_produto (
@@ -27,6 +39,7 @@ switch ($_POST["acao"]) {
             valor,
             desconto,
             imagem )
+
             values (
                 '$descricao',
                 $peso,
@@ -36,6 +49,8 @@ switch ($_POST["acao"]) {
                 $valor,
                 $desconto,
                 $imagem )";
+
+                echo $sqlInsert;
 
         $resultado = mysqli_query($conexao, $sqlInsert) or die(mysqli_error($conexao));
 
@@ -54,6 +69,6 @@ switch ($_POST["acao"]) {
         break;
 
     default:
-        # code...
+
         break;
 }

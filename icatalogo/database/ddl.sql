@@ -16,4 +16,6 @@ create table tbl_produto(
 
 drop table tbl_produto;
 
+DELETE FROM tbl_produto WHERE id = 3;
+
 select * from tbl_produto;
