@@ -1,9 +1,12 @@
 <?php
+session_start();
+
 include("../database/conexao.php");
 
 $query = "select * from tbl_produto";
 
 $produto = mysqli_query($conexao, $query) or die(mysqli_error($conexao));
+
 ?>
 
 <!DOCTYPE html>
@@ -18,14 +21,23 @@ $produto = mysqli_query($conexao, $query) or die(mysqli_error($conexao));
 </head>
 
 <body>
-    <header>
-        <input type="search" placeholder="Pesquisar" />
-    </header>
+    <?php
+    include("../componentes/header/header.php");
+    ?>
     <div class="content">
         <section class="produtos-container">
             <header>
-                <button onclick="javascript:window.location.href ='./novo/'">Novo Produto</button>
-                <button>Adicionar Categoria</button>
+                <?php
+                if (isset($_SESSION["login"])) {
+                ?>
+                    <!-- <header> -->
+                    <button onclick="javascript:window.location.href ='./novo/'">Novo Produto</button>
+                    <button>Adicionar Categoria</button>
+                    <!-- </header> -->
+                <?php
+                }
+                unset($_SESSION["login"]);
+                ?>
             </header>
             <main>
                 <article class="card-produto">
@@ -62,7 +74,41 @@ $produto = mysqli_query($conexao, $query) or die(mysqli_error($conexao));
 
                     </footer>
                 </article>
+                <!-- <article class="card-produto">
+                    <figure>
+                        <img src="http://3.bp.blogspot.com/-u34_1MW1w5g/T_eNqYLmtFI/AAAAAAAAEP0/jnssgMNcS8Y/s1600/converse-all-star-dark-blue.png" />
+                    </figure>
+                    <section>
+                        <span class="preco">R$ 1000,00</span>
+                        <span class="parcelamento">ou em <em>10x R$100,00 sem juros</em></span>
+
+                        <span class="descricao">Produto xyz cor preta novo perfeito estado 100%</span>
+                        <span class="categoria">
+                            <em>Calçados</em> <em>Vestuário</em><em>Calçados</em>
+                        </span>
+                    </section>
+                    <footer>
+
+                    </footer>
+                </article>
                 <article class="card-produto">
+                    <figure>
+                        <img src="http://3.bp.blogspot.com/-u34_1MW1w5g/T_eNqYLmtFI/AAAAAAAAEP0/jnssgMNcS8Y/s1600/converse-all-star-dark-blue.png" />
+                    </figure>
+                    <section>
+                        <span class="preco">R$ 1000,00</span>
+                        <span class="parcelamento">ou em <em>10x R$100,00 sem juros</em></span>
+
+                        <span class="descricao">Produto xyz cor preta novo perfeito estado 100%</span>
+                        <span class="categoria">
+                            <em>Calçados</em> <em>Vestuário</em><em>Calçados</em>
+                        </span>
+                    </section>
+                    <footer>
+
+                    </footer>
+                </article> -->
+                <!-- <article class="card-produto">
                     <figure>
                         <img src="http://3.bp.blogspot.com/-u34_1MW1w5g/T_eNqYLmtFI/AAAAAAAAEP0/jnssgMNcS8Y/s1600/converse-all-star-dark-blue.png" />
                     </figure>
@@ -129,41 +175,7 @@ $produto = mysqli_query($conexao, $query) or die(mysqli_error($conexao));
                     <footer>
 
                     </footer>
-                </article>
-                <article class="card-produto">
-                    <figure>
-                        <img src="http://3.bp.blogspot.com/-u34_1MW1w5g/T_eNqYLmtFI/AAAAAAAAEP0/jnssgMNcS8Y/s1600/converse-all-star-dark-blue.png" />
-                    </figure>
-                    <section>
-                        <span class="preco">R$ 1000,00</span>
-                        <span class="parcelamento">ou em <em>10x R$100,00 sem juros</em></span>
-
-                        <span class="descricao">Produto xyz cor preta novo perfeito estado 100%</span>
-                        <span class="categoria">
-                            <em>Calçados</em> <em>Vestuário</em><em>Calçados</em>
-                        </span>
-                    </section>
-                    <footer>
-
-                    </footer>
-                </article>
-                <article class="card-produto">
-                    <figure>
-                        <img src="http://3.bp.blogspot.com/-u34_1MW1w5g/T_eNqYLmtFI/AAAAAAAAEP0/jnssgMNcS8Y/s1600/converse-all-star-dark-blue.png" />
-                    </figure>
-                    <section>
-                        <span class="preco">R$ 1000,00</span>
-                        <span class="parcelamento">ou em <em>10x R$100,00 sem juros</em></span>
-
-                        <span class="descricao">Produto xyz cor preta novo perfeito estado 100%</span>
-                        <span class="categoria">
-                            <em>Calçados</em> <em>Vestuário</em><em>Calçados</em>
-                        </span>
-                    </section>
-                    <footer>
-
-                    </footer>
-                </article>
+                </article> -->
 
                 <?php
                 while ($linha = mysqli_fetch_array($produto)) {
@@ -172,7 +184,7 @@ $produto = mysqli_query($conexao, $query) or die(mysqli_error($conexao));
 
 
                         <figure>
-                        
+
                         </figure>
                         <section>
                             <span class="preco"><?= $linha["valor"] ?></span>
