@@ -8,7 +8,7 @@
     if (isset($_SESSION["login"])) {
     ?>
         <nav>
-            <a href="../../produtos/index.php" id="logout" name="logout">Sair</a>
+            <a href="/web-backend/icatalogo/produtos/index.php?action=logout" id="logout" name="logout">Sair</a>
         </nav>
     <?php
     } else {
@@ -23,9 +23,9 @@
         <h1>Fazer Login</h1>
         <form action="/web-backend/icatalogo/componentes/header/loginActions.php" method="POST">
             <input type="hidden" name="action" value="login" />
-            <input type="text" name="usuario" placeholder="Usuário">
+            <input type="text" name="usuario" placeholder="Usuário" required>
             <input type="hidden" name="action" value="login" />
-            <input type="text" name="senha" placeholder="Senha">
+            <input type="text" name="senha" placeholder="Senha" required>
             <button name="login">Entrar</button>
         </form>
     </div>

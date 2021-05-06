@@ -30,13 +30,13 @@ $produto = mysqli_query($conexao, $query) or die(mysqli_error($conexao));
                 <?php
                 if (isset($_SESSION["login"])) {
                 ?>
-                    <!-- <header> -->
                     <button onclick="javascript:window.location.href ='./novo/'">Novo Produto</button>
                     <button>Adicionar Categoria</button>
-                    <!-- </header> -->
                 <?php
+                    if (isset($_SESSION["logout"])) {
+                        session_destroy();
+                    }
                 }
-                unset($_SESSION["login"]);
                 ?>
             </header>
             <main>

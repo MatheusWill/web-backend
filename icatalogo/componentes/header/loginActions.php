@@ -18,9 +18,9 @@ function validarCampos()
     return $erros;
 }
 
-$logout = fn() => session_destroy();
+// $logout = fn() => session_destroy();
 
-$sair = $_GET["logout"];
+// $sair = session_destroy();
 
 switch ($_POST["action"]) {
     case "login":
@@ -48,7 +48,6 @@ switch ($_POST["action"]) {
 
         if ($erros == true) {
 
-            // header("location: /web-backend/icatalogo/produtos/index.php");
             echo "erro";
             $erros[] = "Usuário e/ou senha incorretos";
         }
@@ -58,17 +57,15 @@ switch ($_POST["action"]) {
             $_SESSION["id"] = $teste["id"];
             $_SESSION["nome"] = $teste["nome"];
             $_SESSION["login"] = true;
+            $_SESSION["logout"] = false;
 
             header("location: /web-backend/icatalogo/produtos/index.php");
         }
 
-        // header("location: /web-backend/icatalogo/produtos/index.php");
-
         break;
 
     case "logout":
-        session_destroy();
-
+     
         break;
 }
 
@@ -89,4 +86,4 @@ switch ($_POST["action"]) {
 
     // mostrar os botões de adicionar produto e categoria somente se estiver logado - OK
 
-    // implementar o logout
+    // implementar o logout - OK

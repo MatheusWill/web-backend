@@ -38,6 +38,7 @@
     cursor: pointer;
     font-weight: bold;
     padding: 10px;
+    text-decoration: none;
 
     transition: 0.2s;
 }
