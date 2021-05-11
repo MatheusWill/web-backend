@@ -23,6 +23,7 @@ create table tbl_administrador(
     
 insert into tbl_administrador values (10, "Matheus", "maoxoo", 13128359);
 insert into tbl_administrador(nome, usuario, senha) values ("Ana", "aninha33", "superman33");
+insert into tbl_administrador(nome, usuario, senha) values ("Zé", "zezin", "123");
 
 drop table tbl_produto;
 drop table tbl_administrador;
@@ -32,3 +33,4 @@ DELETE FROM tbl_administrador WHERE id = 2;
 
 select * from tbl_produto;
 select * from tbl_administrador;
+SELECT * FROM tbl_administrador WHERE usuario = 'maoxoo' and senha = '13128359';

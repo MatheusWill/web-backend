@@ -25,6 +25,19 @@ $produto = mysqli_query($conexao, $query) or die(mysqli_error($conexao));
     include("../componentes/header/header.php");
     ?>
     <div class="content">
+        <div style="position: absolute; top: 0; right: 0;">
+            <?php
+            if (isset($_SESSION["erros"])) {
+                echo $_SESSION["erros"][0];
+            }
+            if (isset($_SESSION["mensagem"])) {
+                echo $_SESSION["mensagem"];
+            }
+            unset($_SESSION["erros"]);
+            unset($_SESSION["mensagem"]);
+            ?>
+        </div>
+
         <section class="produtos-container">
             <header>
                 <?php
@@ -33,9 +46,6 @@ $produto = mysqli_query($conexao, $query) or die(mysqli_error($conexao));
                     <button onclick="javascript:window.location.href ='./novo/'">Novo Produto</button>
                     <button>Adicionar Categoria</button>
                 <?php
-                    if (isset($_SESSION["logout"])) {
-                        session_destroy();
-                    }
                 }
                 ?>
             </header>

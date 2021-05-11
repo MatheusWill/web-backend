@@ -73,12 +73,6 @@
     border-top: 15px solid transparent;
 }
 
-.container-login>form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
 .container-login input {
     width: 100%;
 }
@@ -87,3 +81,12 @@
     font-size: 20px;
     color: var(--textSecundary);
 }
+
+.container-login > form {
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .container-login > h1 {
+    display: none;
+  }

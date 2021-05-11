@@ -32,15 +32,15 @@ switch ($_POST["action"]) {
         $erros = validarCampos();
 
         if (count($erros) > 0) {
-            $_SESSION["erros"] = $erros;
+            $_SESSION["mensagem"] = $erros;
 
-            header("location: produtos/index.php");
+            header("location: /web-backend/icatalogo/produtos/index.php");
         }
 
         $usuario = $_POST["usuario"];
         $senha = $_POST["senha"];
 
-        $sqlSelect = "SELECT * FROM tbl_administrador WHERE usuario = '$usuario'";
+        $sqlSelect = "SELECT * FROM tbl_administrador WHERE usuario = '$usuario' ";
 
         $resultado = mysqli_query($conexao, $sqlSelect) or die(mysqli_error($conexao));
 
@@ -52,20 +52,25 @@ switch ($_POST["action"]) {
             $erros[] = "Usuário e/ou senha incorretos";
         }
 
-        if ($usuario == $teste["usuario"] && $senha == $teste["senha"]) {
+        if ($usuario == $teste["usuario"] && password_verify($senha, $teste["senha"])) {
 
             $_SESSION["id"] = $teste["id"];
             $_SESSION["nome"] = $teste["nome"];
             $_SESSION["login"] = true;
             $_SESSION["logout"] = false;
-
-            header("location: /web-backend/icatalogo/produtos/index.php");
+            $_SESSION["mensagem"] = "Bem vindo " . $teste["nome"];
         }
+
+        header("location: /web-backend/icatalogo/produtos/index.php");
 
         break;
 
     case "logout":
-     
+
+        session_destroy();
+
+        header("location: /web-backend/icatalogo/produtos/index.php");
+
         break;
 }
 
