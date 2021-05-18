@@ -1,6 +1,19 @@
 <?php
 
+require("../../database/conexao.php");
+
+$query = "select * from tbl_categoria";
+
+$resultado = mysqli_query($conexao, $query);
+
 session_start();
+
+if (!isset($_SESSION["id"])) {
+
+  $_SESSION["mensagem"] = "Você precisa fazer login!";
+
+  header("location: ../index.php");
+}
 
 ?>
 
@@ -78,6 +91,23 @@ session_start();
           <div class="input-group">
             <label for="desconto">Desconto</label>
             <input type="text" id="desconto" name="desconto">
+          </div>
+
+          <input type="hidden" name="acao" value="salvar" />
+          <div class="input-group">
+            <label for="categoria">Categoria</label>
+            <select id="categoria" name="categoria">
+              <option value="">SELECIONE</option>
+              <?php
+              while ($itemDescricao = mysqli_fetch_array($resultado)) {
+              ?>
+                <option value="<?= $itemDescricao["id"] ?>">
+                  <?= $itemDescricao["descricao"] ?>
+                </option>
+              <?php
+              }
+              ?>
+            </select>
           </div>
 
           <button onclick="javascript:window.location.href = '../'">Cancelar</button>

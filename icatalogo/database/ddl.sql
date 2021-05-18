@@ -20,6 +20,11 @@ create table tbl_administrador(
     usuario varchar(255) not null,
     senha varchar (255) not null
     );
+
+create table tbl_categoria (
+    id int primary key auto_increment,
+    descricao varchar(255) not null
+);
     
 insert into tbl_administrador values (10, "Matheus", "maoxoo", 13128359);
 insert into tbl_administrador(nome, usuario, senha) values ("Ana", "aninha33", "superman33");
@@ -30,7 +35,9 @@ drop table tbl_administrador;
 
 DELETE FROM tbl_produto WHERE id > 0;
 DELETE FROM tbl_administrador WHERE id = 2;
+delete from tbl_categoria where id > 0;
 
 select * from tbl_produto;
 select * from tbl_administrador;
 SELECT * FROM tbl_administrador WHERE usuario = 'maoxoo' and senha = '13128359';
+select * from tbl_categoria;
