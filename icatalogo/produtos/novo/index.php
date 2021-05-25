@@ -6,15 +6,6 @@ $query = "select * from tbl_categoria";
 
 $resultado = mysqli_query($conexao, $query);
 
-session_start();
-
-if (!isset($_SESSION["id"])) {
-
-  $_SESSION["mensagem"] = "Você precisa fazer login!";
-
-  header("location: ../index.php");
-}
-
 ?>
 
 <!DOCTYPE html>
@@ -29,13 +20,20 @@ if (!isset($_SESSION["id"])) {
 </head>
 
 <body>
-  <header>
-    <input type="search" placeholder="Pesquisar" />
-  </header>
+  <?php
+  include("../../componentes/header/header.php");
+
+  if (!isset($_SESSION["id"])) {
+
+    $_SESSION["mensagem"] = "Você precisa fazer login!";
+
+    header("location: ../index.php");
+  }
+  ?>
   <div class="content">
     <section class="produtos-container">
       <main>
-        <form class="form-produto" method="POST" action="../novoActions.php">
+        <form class="form-produto" method="POST" action="../novoActions.php" enctype="multipart/form-data">
 
           <h1>Cadastro de produto</h1>
           <ul>
@@ -108,6 +106,10 @@ if (!isset($_SESSION["id"])) {
               }
               ?>
             </select>
+          </div>
+          <div class="input-group">
+            <label for="foto">Foto</label>
+            <input type="file" name="foto" id="foto" accept="image/*" />
           </div>
 
           <button onclick="javascript:window.location.href = '../'">Cancelar</button>

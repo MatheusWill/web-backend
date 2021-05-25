@@ -1,12 +1,27 @@
 <?php
-
+session_start();
 require("../database/conexao.php");
 
-switch ($_POST['action']) {
+function validaCampos()
+{
+    $erros = [];
+
+    if (!isset($_POST["descricao"]) || $_POST["descricao"] == "") {
+        $erros[] = "O campo descrição é obrigatório!";
+    }
+    return $erros;
+}
+
+switch ($_POST["action"]) {
     case "salvar":
 
-        if ($conexao == false) {
-            die("ERRO AO CONECTAR" . mysqli_connect_error());
+        $erros = validaCampos();
+
+        if (count($erros) > 0) {
+            $_SESSION["erros"] = $erros;
+            header("location: index.php");
+
+            exit();
         }
 
         $descricao = $_POST["descricao"];
@@ -15,6 +30,12 @@ switch ($_POST['action']) {
 
         $resultado = mysqli_query($conexao, $sqlInsert) or die(mysqli_error($conexao));
 
+        if ($resultado) {
+            $_SESSION["mensagem"] = "Categoria adicionada com sucesso!";
+        } else {
+            $_SESSION["mensagem"] = "Erro ao adicionar categoria!";
+        }
+
         header("location: index.php");
 
         break;
@@ -22,13 +43,15 @@ switch ($_POST['action']) {
     case "deletar":
         if (isset($_REQUEST["idDescricao"]) && $_REQUEST["idDescricao"] != "") {
 
-        $idDescricao = $_REQUEST["idDescricao"];
+            $idDescricao = $_REQUEST["idDescricao"];
 
-        $sqlDelete = "delete from tbl_categoria where id = $idDescricao";
+            $sqlDelete = "delete from tbl_categoria where id = $idDescricao";
 
-        $resultado = mysqli_query($conexao, $sqlDelete) or die(mysqli_error($conexao));;
+            $resultado = mysqli_query($conexao, $sqlDelete) or die(mysqli_error($conexao));;
 
-        header("location: index.php");
+            $_SESSION["mensagem"] = "Categoria deletada com sucesso!";
+
+            header("location: index.php");
         } else {
             echo "eerro";
         }

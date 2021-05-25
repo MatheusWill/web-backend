@@ -1,14 +1,14 @@
 <?php
-// if (!isset($_SESSION["id"])) {
+include("../componentes/header/header.php");
+include("../database/conexao.php");
 
-//     $_SESSION["mensagem"] = "Você precisa fazer login!";
+$query = "select * from tbl_categoria";
 
-//     header("location: ../produtos/index.php");
-// }
+$resultado = mysqli_query($conexao, $query) or die(mysqli_error($conexao));
+
 ?>
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
@@ -20,34 +20,36 @@
 </head>
 
 <body>
-    <?php
-    include("../componentes/header/header.php");
-    include("./categoriaAction.php");
-
-    $query = "select * from tbl_categoria";
-
-    $resultado = mysqli_query($conexao, $query);
-
-    // $itemDescricao = mysqli_fetch_array($resultado);
-
-
-
-    ?>
     <div class="content">
         <section class="categorias-container">
             <main>
                 <form class="form-categoria" method="POST" action="./categoriaAction.php">
                     <h1 class="span2">Adicionar Categorias</h1>
+                    <ul>
+                        <?php
+                        if (isset($_SESSION["erros"])) {
+                            foreach ($_SESSION["erros"] as $erros) {
+                        ?>
+                                <li><?= $erros ?></li>
+                        <?php
+                            }
+                            unset($_SESSION["erros"]);
+                        }
+                        ?>
+                    </ul>
                     <div class="input-group span2">
                         <input type="hidden" name="action" value="salvar">
                         <label for="descricao">Descrição</label>
                         <input type="text" name="descricao" id="descricao" />
                     </div>
                     <button name="salvar">Salvar</button>
-                    <button>Cancelar</button>
+                    <button type="button" onclick="javascript:window.location.href = '../produtos'">Cancelar</button>
                 </form>
                 <h1>Lista de Categorias</h1>
                 <?php
+                if (mysqli_num_rows($resultado) == 0) {
+                    echo "<p style='text-align: center'>Nenhuma categoria cadastrada.</p>";
+                }
                 while ($itemDescricao = mysqli_fetch_array($resultado)) {
                 ?>
                     <div class="card-categorias">

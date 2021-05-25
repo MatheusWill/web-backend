@@ -1,7 +1,30 @@
+<?php
+session_start();
+?>
 <link rel="stylesheet" href="/web-backend/icatalogo/componentes/header/header.css">
+<?php
+if (isset($_SESSION["mensagem"])) {
+?>
+    <div class="mensagens">
+        <?= $_SESSION["mensagem"]; ?>
+    </div>
+
+    <script lang="javascript">
+        setTimeout(() => {
+            document.querySelector(".mensagens").style.display = "none"
+        }, 4000);
+    </script>
+
+<?php
+    unset($_SESSION["mensagem"]);
+}
+?>
+
 <header class="header">
     <figure>
-        <img src="/web-backend/icatalogo/imgs/logo3.png">
+        <a href="/web-backend/icatalogo/produtos">
+            <img src="/web-backend/icatalogo/imgs/logo3.png">
+        </a>
     </figure>
     <input type="search" placeholder="Pesquisar" />
     <?php
@@ -18,7 +41,7 @@
     ?>
         <nav>
             <a id="menu_admin">Administrar</a>
-        </nav>      
+        </nav>
     <?php
     }
     ?>
@@ -55,7 +78,7 @@
         }
     }
 
-    function logout(){
+    function logout() {
         document.querySelector('#form-logout').submit()
     }
 </script>

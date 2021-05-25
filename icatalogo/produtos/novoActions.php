@@ -11,15 +11,27 @@ switch ($_POST["acao"]) {
             die("ERRO AO CONECTAR" . mysqli_connect_error());
         }
 
-        //faltou chamar a função aqui
         $erros = validarCampos();
 
-        //aqui tem que verificar se tem erros e colocar na sessão
-        if(count($erros) > 0){
+        if (count($erros) > 0) {
             $_SESSION["erros"] = $erros;
 
             header("location: novo/index.php");
+
+            exit();
         }
+
+        //pegamos o nome original do arquivo       
+        $nomeArquivo = $_FILES["foto"]["name"];
+
+        //extraímos do nome original a extensão        
+        $extensao = pathinfo($nomeArquivo, PATHINFO_EXTENSION);
+
+        //geramos um novo nome único utilizando o unix timestamp        
+        $novoNomeArquivo = md5(microtime()) . ".$extensao";
+
+        //movemos a foto para a pasta fotos dentro de produtos       
+        move_uploaded_file($_FILES["foto"]["tmp_name"], "novo/fotos/$novoNomeArquivo");
 
         $descricao = $_POST["descricao"];
         $peso = str_replace(",", ".", $_POST["peso"]);
@@ -28,7 +40,7 @@ switch ($_POST["acao"]) {
         $tamanho = $_POST["tamanho"];
         $valor = str_replace(",", ".", $_POST["valor"]);
         $desconto = $_POST["desconto"] != "" ? $_POST["desconto"] : 0;
-        $imagem = "1";
+        $categoriaId = $_POST["categoria"];
 
         $sqlInsert = "insert into tbl_produto (
             descricao,
@@ -38,7 +50,8 @@ switch ($_POST["acao"]) {
             tamanho,
             valor,
             desconto,
-            imagem )
+            imagem,
+            categoria_id )
 
             values (
                 '$descricao',
@@ -48,17 +61,20 @@ switch ($_POST["acao"]) {
                 '$tamanho',
                 $valor,
                 $desconto,
-                $imagem )";
+                '$novoNomeArquivo',
+                $categoriaId )";
 
-                echo $sqlInsert;
+        echo $sqlInsert;
 
         $resultado = mysqli_query($conexao, $sqlInsert) or die(mysqli_error($conexao));
 
-        // if (mysqli_query($conexao, $sqlInsert)) {
-        //     echo "Sucesso.";
-        // } else {
-        //     echo "ERRO" . mysqli_error($conexao);
-        // }
+        if ($resultado) {
+            $mensagem = "Produto inserido com sucesso!";
+        } else {
+            $mensagem = "Erro ao inserir o produto";
+        }
+
+        $_SESSION["mensagem"] = $mensagem;
 
         header("location: index.php");
 

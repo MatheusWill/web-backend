@@ -1,9 +1,12 @@
 <?php
-session_start();
+// session_start();
 function validarCampos()
 {
 
     $erros = [];
+    if (!isset($_POST["descricao"]) && $_POST["descricao"] == "") {
+        $erros[] = "O campo descrição é obrigatório";
+    }
 
     if (!isset($_POST["peso"]) && $_POST["peso"] == "") {
         $erros[] = "O campo peso é obrigatório";
@@ -27,9 +30,35 @@ function validarCampos()
         $erros[] = "O campo cor é obrigatório";
     }
 
-    return $erros;
+    if ($_FILES["foto"]["error"] == UPLOAD_ERR_NO_FILE) {
+        $erros[] = "Você deve enviar uma imagem";
+    } else {
 
+        $imagemInfos = getimagesize($_FILES["foto"]["tmp_name"]);
+
+        if (!$imagemInfos) {
+            $erros[] = "O arquivo precisa ser uma imagem";
+        }
+        if ($_FILES["foto"]["size"] > 1024 * 1024 * 2) {
+            $erros[] = "O arquivo não pode ser maior que 2MB";
+        }
+    }
+
+    $width = $imagemInfos[0];
+    $height = $imagemInfos[1];
+
+    if ($width != $height) {
+        $erros[] = "A imagem precisa ser quadrada!";
+    }
+
+    if (!isset($_POST["categoria"]) || $_POST["categoria"] == "") {
+        $erros[] = "O campo categoria é obrigatório!";
+    }
+
+    return $erros;
 }
+
+
 
 //Função de maskara
 

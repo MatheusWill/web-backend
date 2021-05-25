@@ -41,3 +41,12 @@ select * from tbl_produto;
 select * from tbl_administrador;
 SELECT * FROM tbl_administrador WHERE usuario = 'maoxoo' and senha = '13128359';
 select * from tbl_categoria;
+select p.*, c.descricao as categoria from tbl_produto p
+inner join tbl_categoria c on p.categoria_id = c.id
+order by p.id desc;
+
+truncate tbl_produto;
+
+alter table tbl_produto
+add column categoria_id int,
+add foreign key (categoria_id) references tbl_categoria(id);
