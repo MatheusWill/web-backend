@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 ?>
 <link rel="stylesheet" href="/web-backend/icatalogo/componentes/header/header.css">
 <?php
@@ -26,7 +27,10 @@ if (isset($_SESSION["mensagem"])) {
             <img src="/web-backend/icatalogo/imgs/logo3.png">
         </a>
     </figure>
-    <input type="search" placeholder="Pesquisar" />
+    <form action="/web-backend/icatalogo/produtos/index.php" method="GET">
+        <input type="text" name="q" placeholder="Pesquisar" />
+        <button><img src="/web-backend/icatalogo/imgs/lupa.svg"/></button>
+    </form>
     <?php
     if (isset($_SESSION["login"])) {
     ?>

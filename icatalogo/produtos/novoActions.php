@@ -80,7 +80,28 @@ switch ($_POST["acao"]) {
 
         break;
 
-    case "cancelar":
+    case "deletar":
+        if (isset($_REQUEST["idDescricao"]) && $_REQUEST["idDescricao"] != "") {
+
+            $idCard = $_REQUEST["idDescricao"];
+
+            $sqlDelete = "DELETE FROM tbl_produto WHERE id = $idCard";
+            $sql = "select * from tbl_produto where id = $idCard";
+
+            $resultadoSelect = mysqli_query($conexao, $sql); 
+
+            $image = mysqli_fetch_array($resultadoSelect);
+
+            $x = $image["imagem"];
+
+            unlink("./novo/fotos/$x");
+
+            $resultado = mysqli_query($conexao, $sqlDelete);    
+
+            $_SESSION["mensagem"] = "Produto deletado com sucesso!";
+
+            header("location: index.php");
+        }
 
         break;
 

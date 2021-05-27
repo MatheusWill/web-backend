@@ -2,13 +2,20 @@
 
 include("../database/conexao.php");
 
-$query = "select p.*, c.descricao as categoria from tbl_produto p
+if (!isset($_GET["q"]) || $_GET["q"] == '') {
+    $query = "select p.*, c.descricao as categoria from tbl_produto p
             inner join tbl_categoria c on p.categoria_id = c.id
             order by p.id desc";
+} else {
+    $q = $_GET["q"];
+    $query = "select p.*, c.descricao as categoria from tbl_produto p
+                inner join tbl_categoria c on p.categoria_id = c.id
+                where p.descricao like '%$q%'
+                or c.descricao like '%$q%'
+                order by p.id desc";
+}
 
 $produto = mysqli_query($conexao, $query) or die(mysqli_error($conexao));
-
-
 
 ?>
 
@@ -53,28 +60,12 @@ $produto = mysqli_query($conexao, $query) or die(mysqli_error($conexao));
                 ?>
             </header>
             <main>
-                <article class="card-produto">
-                    <figure>
-                        <img src="http://3.bp.blogspot.com/-u34_1MW1w5g/T_eNqYLmtFI/AAAAAAAAEP0/jnssgMNcS8Y/s1600/converse-all-star-dark-blue.png" />
-                    </figure>
-                    <section>
-                        <span class="preco">R$ 1000,00</span>
-                        <span class="parcelamento">ou em <em>10x R$100,00 sem juros</em></span>
-
-                        <span class="descricao">Produto xyz cor preta novo perfeito estado 100%</span>
-                        <span class="categoria">
-                            <em>Calçados</em> <em>Vestuário</em><em>Calçados</em>
-                        </span>
-                    </section>
-                    <footer>
-
-                    </footer>
-                </article>
 
                 <?php
                 while ($linha = mysqli_fetch_array($produto)) {
                     $valor = $linha["valor"];
                     $desconto = $linha["desconto"];
+                    $image = $linha["imagem"];
 
                     if ($desconto > 0) {
                         $desconto = ($desconto / 100) * $valor;
@@ -89,14 +80,22 @@ $produto = mysqli_query($conexao, $query) or die(mysqli_error($conexao));
                         $valor = $valor - $desconto;
                         $valorParcelado = $valor / $parcelamento;
                     }
-                ?>
-                    <article class="card-produto">
 
+                    // $qtnParcelas = $valor > 1000 ? 12 : 6;
+
+                    // $valor = $valor - $desconto;
+                    // $valorParcelado = $valor / $parcelamento;
+
+                ?>
+                    <input type="hidden" name="acao" value="<?= $linha["id"] ?>" />
+                    <article class="card-produto">
                         <figure>
+                            <input type="hidden" name="acao" value="deletar" />
+                            <input type="hidden" name="imagem" value="<?= $linha["imagem"] ?>" />
                             <img src="./novo/fotos/<?= $linha["imagem"] ?>" />
                         </figure>
                         <section>
-                            <span class="preco"><?= number_format($valor, 2, ',', '.') ?></span>
+                            <span class="preco">R$ <?= number_format($valor, 2, ',', '.') ?></span>
                             <span class="parcelamento">ou em
                                 <em>
                                     <?= $parcelamento ?>x R$<?= number_format($valorParcelado, 2, ',', '.') ?> sem juros
@@ -110,12 +109,24 @@ $produto = mysqli_query($conexao, $query) or die(mysqli_error($conexao));
                             <span class="categoria">
                                 <em><?= $linha["categoria"] ?></em>
                             </span>
+                            <?php
+                            if (isset($_SESSION["login"])) {
+                            ?>
+                                <form action="./novoActions.php" method="POST" id="form-button-deletar">
+                                    <input type="hidden" name="acao" value="deletar" />
+                                    <input type="hidden" name="idDescricao" value="<?= $linha["id"] ?>" />
+                                    <button>Deletar</button>
+                                </form>
+                            <?php
+                            }
+                            ?>
                         </section>
 
                     </article>
                 <?php
                 }
                 ?>
+
 
             </main>
         </section>

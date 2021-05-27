@@ -50,3 +50,9 @@ truncate tbl_produto;
 alter table tbl_produto
 add column categoria_id int,
 add foreign key (categoria_id) references tbl_categoria(id);
+
+select p.*, c.descricao as categoria from tbl_produto p
+inner join tbl_categoria c on p.categoria_id = c.id
+where p.descricao like "Mochila"
+or c.descricao like "Mochila"
+order by p.id desc;
