@@ -1,8 +1,8 @@
 <?php
-session_start();
 
+// /web-backend/icatalogo
 ?>
-<link rel="stylesheet" href="/web-backend/icatalogo/componentes/header/header.css">
+<link rel="stylesheet" href="/componentes/header/header.css">
 <?php
 if (isset($_SESSION["mensagem"])) {
 ?>
@@ -23,13 +23,13 @@ if (isset($_SESSION["mensagem"])) {
 
 <header class="header">
     <figure>
-        <a href="/web-backend/icatalogo/produtos">
-            <img src="/web-backend/icatalogo/imgs/logo3.png">
+        <a href="/produtos">
+            <img src="/imgs/logo3.png">
         </a>
     </figure>
-    <form action="/web-backend/icatalogo/produtos/index.php" method="GET">
+    <form action="../../produtos/index.php" method="GET">
         <input type="text" name="q" placeholder="Pesquisar" />
-        <button><img src="/web-backend/icatalogo/imgs/lupa.svg"/></button>
+        <button><img src="/imgs/lupa.svg"/></button>
     </form>
     <?php
     if (isset($_SESSION["login"])) {
@@ -37,7 +37,7 @@ if (isset($_SESSION["mensagem"])) {
         <nav>
             <a onclick="logout()" id="logout" name="logout">Sair</a>
         </nav>
-        <form action="/web-backend/icatalogo/componentes/header/loginActions.php" style="display:none" method="POST" id="form-logout">
+        <form action="/componentes/header/loginActions.php" style="display:none" method="POST" id="form-logout">
             <input type="hidden" name="action" value="logout" />
         </form>
     <?php
@@ -51,7 +51,7 @@ if (isset($_SESSION["mensagem"])) {
     ?>
     <div class="container-login" id="container-login">
         <h1>Fazer Login</h1>
-        <form action="/web-backend/icatalogo/componentes/header/loginActions.php" method="POST">
+        <form action="/componentes/header/loginActions.php" method="POST">
             <input type="hidden" name="action" value="login" />
             <input type="text" name="usuario" placeholder="Usuário" required>
             <input type="hidden" name="action" value="login" />

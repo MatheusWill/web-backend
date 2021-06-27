@@ -34,7 +34,7 @@ switch ($_POST["action"]) {
         if (count($erros) > 0) {
             $_SESSION["mensagem"] = $erros;
 
-            header("location: /web-backend/icatalogo/produtos/index.php");
+            header("location: /produtos/index.php");
         }
 
         $usuario = $_POST["usuario"];
@@ -61,7 +61,7 @@ switch ($_POST["action"]) {
             $_SESSION["mensagem"] = "Bem vindo " . $teste["nome"];
         }
 
-        header("location: /web-backend/icatalogo/produtos/index.php");
+        header("location: /produtos/index.php");
 
         break;
 
@@ -69,7 +69,7 @@ switch ($_POST["action"]) {
 
         session_destroy();
 
-        header("location: /web-backend/icatalogo/produtos/index.php");
+        header("location: /produtos/index.php");
 
         break;
 }

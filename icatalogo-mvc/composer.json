@@ -1,0 +1,16 @@
+{
+    "name": "vitoria/icatalogo-mvc",
+    "description": "Projeto icatalogo utilizando mvc e poo",
+    "autoload": {
+        "psr-4": {
+            "App\\": "App/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Matheus Willian de Oliveira",
+            "email": "matheuswill6663@gmail.com"
+        }
+    ],
+    "require": {}
+}

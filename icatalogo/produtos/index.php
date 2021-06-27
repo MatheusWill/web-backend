@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 include("../database/conexao.php");
 
 if (!isset($_GET["q"]) || $_GET["q"] == '') {
@@ -126,8 +126,6 @@ $produto = mysqli_query($conexao, $query) or die(mysqli_error($conexao));
                 <?php
                 }
                 ?>
-
-
             </main>
         </section>
     </div>
